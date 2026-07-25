@@ -9,7 +9,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Inter:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg-primary:#F2F3F4;
+    --bg-primary:#FAFAF8;
     --bg-secondary:#EFEFEA;
     --ink:#0B0B0B;
     --gray:#6E6E6E;
@@ -149,6 +149,9 @@
   }
   .photo-block .tag::before{content:'◇ ';color:#c9c9c9;}
 
+  .video-slot .icon{animation:videoPulse 2.4s ease-in-out infinite;}
+  @keyframes videoPulse{0%,100%{opacity:.8;transform:scale(1);}50%{opacity:1;transform:scale(1.08);}}
+
   /* Hero */
   .hero{min-height:100vh;display:flex;flex-direction:column;justify-content:flex-end;padding:150px 0 90px;border-top:none;position:relative;}
   .hero-content{position:relative;z-index:2;}
@@ -215,6 +218,18 @@
   .card h3{font-family:'Fraunces',serif;font-size:19px;margin:14px 0 10px;font-weight:500;}
   .card p{color:var(--gray);font-size:13.5px;line-height:1.65;margin:0;}
 
+  /* list-card (fondations / développement) */
+  .list-card{border:1px solid var(--hairline-strong);background:var(--bg-secondary);padding:30px 26px;transition:border-color .35s;}
+  .list-card:hover{border-color:var(--chrome-a);}
+  .list-card .lc-tag{
+    font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;
+    color:var(--chrome-a);display:block;padding-bottom:14px;margin-bottom:16px;border-bottom:1px solid var(--hairline-strong);
+  }
+  .list-card .lc-intro{color:var(--ink);font-size:13.5px;line-height:1.6;margin:0 0 14px;font-weight:400;}
+  .list-card ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:11px;}
+  .list-card li{position:relative;padding-left:16px;color:var(--gray);font-size:13.5px;line-height:1.55;}
+  .list-card li::before{content:'—';position:absolute;left:0;top:0;color:var(--chrome-a);}
+
   /* timeline (challenges) */
   .timeline{border-left:1px solid var(--hairline-strong);margin-left:8px;}
   .t-item{position:relative;padding:0 0 46px 34px;}
@@ -265,12 +280,66 @@
   .social-tile .spec{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.08em;text-transform:uppercase;color:var(--gray);line-height:1.6;}
   @media (max-width:768px){ .social-grid{grid-template-columns:repeat(2,1fr);} }
 
+  /* impact & résultats — stat cards */
+  .stat-group{margin-bottom:64px;}
+  .stat-group:last-child{margin-bottom:0;}
+  .stat-group__title{
+    font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--ink);margin-bottom:22px;display:flex;align-items:center;gap:10px;
+  }
+  .stat-group__title::before{content:'';width:16px;height:1px;background:var(--chrome-a);display:inline-block;}
+  .stat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--hairline-strong);border:1px solid var(--hairline-strong);}
+  @media (max-width:900px){ .stat-grid{grid-template-columns:repeat(2,1fr);} }
+  @media (max-width:560px){ .stat-grid{grid-template-columns:1fr;} }
+  .stat-card{background:var(--bg-primary);padding:32px 24px;position:relative;transition:background .35s;}
+  .stat-card:hover{background:var(--bg-secondary);}
+  .stat-number{font-family:'Fraunces',serif;font-weight:500;font-size:clamp(1.9rem,3.3vw,2.5rem);line-height:1;color:var(--ink);white-space:nowrap;}
+  .stat-label{font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--gray);margin-top:12px;line-height:1.5;}
+  .stat-note{
+    font-family:'Inter',sans-serif;font-weight:300;font-size:12.5px;line-height:1.6;color:var(--gray);
+    max-height:0;opacity:0;overflow:hidden;margin-top:0;
+    transition:max-height .4s ease,opacity .4s ease,margin-top .4s ease;
+  }
+  .stat-card:hover .stat-note{max-height:120px;opacity:1;margin-top:12px;}
+
   /* quote */
   .quote-section{text-align:left;}
   .quote-section blockquote{
     font-family:'Fraunces',serif;font-style:italic;font-weight:400;
     font-size:clamp(1.7rem,4.2vw,3rem);line-height:1.3;max-width:20ch;margin:0;
   }
+
+  /* compare grid (avant / aujourd'hui) */
+  .compare-grid{border-bottom:1px solid var(--hairline);}
+  .compare-row{display:grid;grid-template-columns:1fr 40px 1fr;align-items:center;gap:14px;padding:22px 0;border-top:1px solid var(--hairline);}
+  .compare-row.compare-head{padding-bottom:14px;}
+  .ch-label{font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--chrome-a);}
+  .compare-row .before{color:var(--gray);font-size:14.5px;line-height:1.6;}
+  .compare-row .arrow{text-align:center;color:var(--chrome-a);font-size:14px;}
+  .compare-row .after{color:var(--ink);font-size:15px;line-height:1.6;font-weight:400;}
+  @media (max-width:768px){
+    .compare-row{grid-template-columns:1fr;gap:6px;padding:18px 0;}
+    .compare-row .arrow{display:none;}
+    .compare-row.compare-head{display:none;}
+    .compare-row .before{opacity:.55;}
+    .compare-row .before::before{content:'Avant — ';font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.08em;text-transform:uppercase;}
+    .compare-row .after::before{content:'Aujourd\2019 hui — ';font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.08em;text-transform:uppercase;color:var(--chrome-a);}
+  }
+
+  /* tools & technologies */
+  .tool-group{margin-top:44px;}
+  .tool-group:first-child{margin-top:0;}
+  .tool-group__title{
+    font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;
+    color:var(--chrome-a);display:block;padding-bottom:12px;margin-bottom:20px;border-bottom:1px solid var(--hairline-strong);
+  }
+  .tool-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;}
+  @media (max-width:900px){ .tool-grid{grid-template-columns:repeat(2,1fr);} }
+  @media (max-width:560px){ .tool-grid{grid-template-columns:1fr;} }
+  .tool-card{border:1px solid var(--hairline-strong);background:var(--bg-secondary);padding:18px 16px;transition:border-color .3s;}
+  .tool-card:hover{border-color:var(--chrome-a);}
+  .tool-card h4{font-family:'Fraunces',serif;font-weight:500;font-size:15px;margin:0 0 8px;}
+  .tool-card p{color:var(--gray);font-size:12px;line-height:1.5;margin:0;}
 
   /* contact */
   .contact-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:70px;align-items:end;}
@@ -303,9 +372,11 @@
 <nav>
   <div class="mark">A.L.L.</div>
   <div class="links">
-    <a href="#histoire">Parcours</a>
-    <a href="#etude-cas">Étude de cas</a>
-    <a href="#forces">Forces</a>
+    <a href="#fondations">Fondations</a>
+    <a href="#developpement">Développement</a>
+    <a href="#aujourdhui">Aujourd'hui</a>
+    <a href="#impact">Impact</a>
+    <a href="#futur">Futur</a>
     <a href="#contact">Contact</a>
   </div>
 </nav>
@@ -339,7 +410,7 @@
     </div>
     <div class="reveal reveal-delay-1">
       <p class="lede">Mon premier emploi n'a pas été un poste d'entrée classique. Dès mon arrivée, le mandat s'est révélé beaucoup plus large que le marketing traditionnel : bâtir une fonction qui n'existait pas encore, sans précédent interne, sans mentor et sans feuille de route.</p>
-      <p class="lede" style="margin-top:22px;">Ce portfolio raconte comment cette contrainte de départ — construire à partir de rien — est devenue le fil conducteur de tout ce que j'ai accompli depuis : <span class="chrome-text" style="font-weight:500;">créer de la valeur malgré les contraintes.</span></p>
+      <p class="lede" style="margin-top:22px;">Ce portfolio raconte comment cette contrainte de départ — bâtir une fonction dans un environnement où presque tout était à créer — est devenue le fil conducteur de tout ce que j'ai accompli depuis : <span class="chrome-text" style="font-weight:500;">créer de la valeur malgré les contraintes.</span></p>
     </div>
   </div>
   <div class="shell" style="margin-top:60px;">
@@ -351,36 +422,46 @@
   </div>
 </section>
 
-<!-- CASE STUDY PRINCIPAL -->
-<section id="etude-cas">
+<!-- 01 — LES FONDATIONS -->
+<section id="fondations">
   <div class="shell">
-    <div class="eyebrow reveal">Étude de cas principale</div>
-    <h2 class="kicker-title reveal" style="max-width:22ch;margin-bottom:60px;">Construire un département marketing à partir de zéro.</h2>
+    <div class="eyebrow reveal">01 — Les fondations</div>
+    <h2 class="kicker-title reveal" style="max-width:24ch;margin-bottom:34px;">Construire l'infrastructure avant de penser stratégie.</h2>
+    <p class="lede reveal reveal-delay-1" style="margin-bottom:54px;">À mon arrivée, l'entreprise avait un site web lancé depuis environ un an mais peu entretenu, et une page Facebook active — mais tout aussi peu entretenue — sans véritable stratégie marketing, ni département structuré pour la porter. Avant de lancer quoi que ce soit, il fallait construire l'infrastructure elle-même.</p>
 
-    <div class="anatomy reveal reveal-delay-1">
-      <div class="anatomy-row">
-        <div class="label">Contexte</div>
-        <div class="body">Une entreprise organisée en <strong>regroupement de marchands indépendants</strong> partageant une même bannière, où la fonction marketing n'était ni structurée ni reconnue comme un levier stratégique.</div>
+    <div class="grid-3 reveal reveal-delay-1">
+      <div class="list-card">
+        <span class="lc-tag">Écosystème numérique</span>
+        <ul>
+          <li>Création du compte Instagram</li>
+          <li>Création du compte TikTok</li>
+          <li>Création de la page LinkedIn</li>
+          <li>Configuration de Meta Business Suite</li>
+          <li>Installation de Google Analytics 4</li>
+          <li>Installation du Meta Pixel</li>
+          <li>Configuration de Google Search Console</li>
+          <li>Configuration de Google Merchant Center</li>
+        </ul>
       </div>
-      <div class="anatomy-row">
-        <div class="label">Défis</div>
-        <div class="body">Aucun budget dédié, aucune équipe existante, une image de marque définie par la maison mère, et des promotions décidées en grande partie à l'externe.</div>
+      <div class="list-card">
+        <span class="lc-tag">Communications</span>
+        <ul>
+          <li>Création d'une infolettre hebdomadaire</li>
+          <li>Développement progressif du contenu sur les réseaux sociaux</li>
+          <li>Mise en place d'un calendrier de contenu</li>
+          <li>Développement d'une présence numérique cohérente</li>
+        </ul>
       </div>
-      <div class="anatomy-row">
-        <div class="label">Approche</div>
-        <div class="body">Poser les fondations avant de produire : cartographier les besoins réels, prioriser ce qui pouvait être contrôlé localement, et démontrer la valeur du marketing par de petites victoires mesurables.</div>
-      </div>
-      <div class="anatomy-row">
-        <div class="label">Actions</div>
-        <div class="body">Mise en place de processus, création d'outils de suivi, développement d'une identité locale cohérente avec les standards nationaux, et coordination avec plusieurs équipes internes.</div>
-      </div>
-      <div class="anatomy-row">
-        <div class="label">Résultats</div>
-        <div class="body"><em>[À compléter — indicateurs, gains d'efficacité, adoption interne, visibilité de marque.]</em></div>
-      </div>
-      <div class="anatomy-row">
-        <div class="label">Apprentissages</div>
-        <div class="body">La valeur stratégique du marketing ne se décrète pas — elle se démontre, une contrainte à la fois.</div>
+      <div class="list-card">
+        <span class="lc-tag">Comprendre l'entreprise</span>
+        <p class="lc-intro">Avant de développer une stratégie, prendre le temps de comprendre :</p>
+        <ul>
+          <li>Les opérations</li>
+          <li>Les différentes équipes</li>
+          <li>Les besoins de l'entreprise</li>
+          <li>La réalité de notre position — marchand indépendant au sein d'un regroupement — par rapport à la maison mère</li>
+          <li>Les habitudes des différentes clientèles (B2C, B2B, enseignants)</li>
+        </ul>
       </div>
     </div>
   </div>
@@ -402,41 +483,47 @@
       <div class="t-item"><span class="t-tag">Site web</span><p>Refonte d'un site web avec une structure imposée, limitant la liberté créative.</p></div>
       <div class="t-item"><span class="t-tag">Reconnaissance</span><p>Faire reconnaître la valeur stratégique du marketing dans une organisation peu familière avec cette fonction.</p></div>
       <div class="t-item"><span class="t-tag">Transformation</span><p>Participer à la gestion du changement lors de l'implantation d'un nouveau système.</p></div>
+      <div class="t-item"><span class="t-tag">Marchés multiples</span><p>Desservir simultanément trois catégories de produits — papeterie, librairie, jeux éducatifs — auprès de clientèles distinctes (B2B, B2C, enseignants, écoles), chacune avec son langage et son parcours d'achat, tout en conservant une identité de marque cohérente.</p></div>
+      <div class="t-item"><span class="t-tag">Données limitées</span><p>Un ERP vieillissant offrant peu de données exploitables, rendant difficile la mesure directe des ventes générées par le marketing — d'où la mise en place des bases de mesure via GA4, Meta Pixel et Google Merchant Center.</p></div>
     </div>
   </div>
 </section>
 
-<!-- RÉALISATIONS -->
-<section id="realisations">
+<!-- 02 — LE DÉVELOPPEMENT -->
+<section id="developpement">
   <div class="shell">
-    <div class="eyebrow reveal">Réalisations</div>
-    <h2 class="kicker-title reveal" style="margin-bottom:14px;">Études de cas.</h2>
-    <p class="lede reveal reveal-delay-1" style="margin-bottom:56px;">Chaque projet suit la même anatomie : contexte, objectifs, défi, stratégie, exécution, résultats, apprentissages. Contenu à venir.</p>
+    <div class="eyebrow reveal">02 — Le développement</div>
+    <h2 class="kicker-title reveal" style="max-width:20ch;margin-bottom:14px;">Ce qui a été bâti depuis.</h2>
+    <p class="lede reveal reveal-delay-1" style="margin-bottom:54px;">Une fois l'infrastructure en place, le travail s'est déplacé vers la stratégie, la structure organisationnelle et l'accompagnement du changement.</p>
 
-    <div class="grid-3">
-      <div class="achv reveal">
-        <div class="thumb photo-block">
-          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="1"></rect><circle cx="9" cy="10" r="1.5"></circle><path d="M21 16l-5.5-5.5L9 17"></path></svg>
-          <span class="label">Visuel du projet</span>
-          <span class="spec">1600×1200px · photo, capture ou mockup</span>
-        </div>
-        <div class="meta"><span class="stage">Étude de cas 01</span><h3>Titre à venir</h3><p>Contexte, stratégie et résultats seront ajoutés ici.</p></div>
+    <div class="grid-3 reveal reveal-delay-1">
+      <div class="list-card">
+        <span class="lc-tag">Marketing</span>
+        <ul>
+          <li>Développement de la stratégie de contenu</li>
+          <li>Création de contenu photo et vidéo</li>
+          <li>Développement des réseaux sociaux</li>
+          <li>Gestion des infolettres</li>
+          <li>Refonte complète du site web</li>
+        </ul>
       </div>
-      <div class="achv reveal reveal-delay-1">
-        <div class="thumb photo-block">
-          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="1"></rect><circle cx="9" cy="10" r="1.5"></circle><path d="M21 16l-5.5-5.5L9 17"></path></svg>
-          <span class="label">Visuel du projet</span>
-          <span class="spec">1600×1200px · photo, capture ou mockup</span>
-        </div>
-        <div class="meta"><span class="stage">Étude de cas 02</span><h3>Titre à venir</h3><p>Contexte, stratégie et résultats seront ajoutés ici.</p></div>
+      <div class="list-card">
+        <span class="lc-tag">Structure</span>
+        <ul>
+          <li>Création et documentation de procédures</li>
+          <li>Standardisation de certaines méthodes de travail</li>
+          <li>Développement d'outils internes</li>
+        </ul>
       </div>
-      <div class="achv reveal reveal-delay-2">
-        <div class="thumb photo-block">
-          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="1"></rect><circle cx="9" cy="10" r="1.5"></circle><path d="M21 16l-5.5-5.5L9 17"></path></svg>
-          <span class="label">Visuel du projet</span>
-          <span class="spec">1600×1200px · photo, capture ou mockup</span>
-        </div>
-        <div class="meta"><span class="stage">Étude de cas 03</span><h3>Titre à venir</h3><p>Contexte, stratégie et résultats seront ajoutés ici.</p></div>
+      <div class="list-card">
+        <span class="lc-tag">Gestion du changement</span>
+        <ul>
+          <li>Participation à l'implantation d'un nouveau système ERP</li>
+          <li>Création de procédures et de guides utilisateurs</li>
+          <li>Formation des employés</li>
+          <li>Communication interne</li>
+          <li>Accompagnement des équipes pendant la transition</li>
+        </ul>
       </div>
     </div>
   </div>
@@ -445,17 +532,17 @@
 <!-- GESTION DU CHANGEMENT -->
 <section id="changement">
   <div class="shell">
-    <div class="eyebrow reveal">Gestion du changement</div>
-    <h2 class="kicker-title reveal" style="margin-bottom:14px;">Accompagner l'adoption, pas seulement l'implantation.</h2>
-    <p class="lede reveal reveal-delay-1" style="margin-bottom:50px;">Lors de l'implantation d'un nouveau système, mon rôle a dépassé le marketing pur pour couvrir l'ensemble du cycle de transformation.</p>
+    <div class="eyebrow reveal">Compétence transversale</div>
+    <h2 class="kicker-title reveal" style="max-width:20ch;margin-bottom:14px;">La gestion du changement, un rôle à part entière.</h2>
+    <p class="lede reveal reveal-delay-1" style="margin-bottom:50px;">Lors de l'implantation d'un nouveau système ERP, mon rôle a largement dépassé le marketing traditionnel : j'ai piloté la préparation, la documentation, la formation et l'accompagnement humain de la transition — pas seulement sa communication.</p>
 
     <div class="steps reveal reveal-delay-1">
-      <div class="step"><span class="tag">Préparation</span><h4>Procédures &amp; documentation</h4><p>Création de procédures claires et de documentation de référence pour encadrer le changement.</p></div>
+      <div class="step"><span class="tag">Préparation</span><h4>Procédures &amp; guides utilisateurs</h4><p>Création de procédures claires, de documentation et de guides utilisateurs pour encadrer le changement.</p></div>
       <div class="step"><span class="tag">Outils</span><h4>Outils &amp; formation</h4><p>Développement d'outils pratiques et formation des employés touchés par le nouveau système.</p></div>
       <div class="step"><span class="tag">Communication</span><h4>Communication interne</h4><p>Messages clairs et réguliers pour accompagner les équipes tout au long de la transition.</p></div>
-      <div class="step"><span class="tag">Accompagnement</span><h4>Soutien direct</h4><p>Présence continue pendant le changement de système pour répondre aux besoins en temps réel.</p></div>
+      <div class="step"><span class="tag">Accompagnement</span><h4>Soutien direct</h4><p>Présence continue pendant le changement de système ERP pour répondre aux besoins en temps réel.</p></div>
       <div class="step"><span class="tag">Adoption</span><h4>Suivi &amp; ajustement</h4><p>Mesure de l'adoption et ajustements pour assurer une transition durable.</p></div>
-      <div class="step"><span class="tag">Résultat</span><h4>Changement intégré</h4><p><em>[À compléter — taux d'adoption, retours des équipes.]</em></p></div>
+      <div class="step"><span class="tag">Résultat</span><h4>Changement intégré</h4><p>Des équipes reconnaissantes d'avoir des procédures claires pour les accompagner, et satisfaites d'un système beaucoup plus puissant que l'ancien. Une certaine réticence chez les employés de longue date — plus de 20 ans avec l'ancien système — mais une ouverture d'esprit réelle envers le changement.</p></div>
     </div>
   </div>
 </section>
@@ -519,6 +606,248 @@
   </div>
 </section>
 
+<!-- 03 — AUJOURD'HUI -->
+<section id="aujourdhui">
+  <div class="shell">
+    <div class="eyebrow reveal">03 — Aujourd'hui</div>
+    <h2 class="kicker-title reveal" style="max-width:20ch;margin-bottom:14px;">Ce que le département est devenu.</h2>
+    <p class="lede reveal reveal-delay-1" style="margin-bottom:50px;">Une évolution, pas une simple liste de tâches accomplies.</p>
+
+    <div class="compare-grid reveal reveal-delay-1">
+      <div class="compare-row compare-head">
+        <span class="ch-label">Avant</span><span></span><span class="ch-label">Aujourd'hui</span>
+      </div>
+      <div class="compare-row"><span class="before">Site web lancé mais peu entretenu</span><span class="arrow">→</span><span class="after">Site web modernisé et aligné à la marque</span></div>
+      <div class="compare-row"><span class="before">Une page Facebook active, sans stratégie</span><span class="arrow">→</span><span class="after">Présence active sur Instagram, TikTok, LinkedIn et Facebook</span></div>
+      <div class="compare-row"><span class="before">Aucune stratégie marketing</span><span class="arrow">→</span><span class="after">Stratégie de contenu structurée</span></div>
+      <div class="compare-row"><span class="before">Aucune communication récurrente</span><span class="arrow">→</span><span class="after">Infolettre hebdomadaire</span></div>
+      <div class="compare-row"><span class="before">Aucun outil de mesure de performance</span><span class="arrow">→</span><span class="after">GA4, Meta Pixel et Google Merchant Center actifs</span></div>
+      <div class="compare-row"><span class="before">Aucun département marketing structuré</span><span class="arrow">→</span><span class="after">Procédures documentées et méthodes standardisées</span></div>
+      <div class="compare-row"><span class="before">Aucun outil de formation interne</span><span class="arrow">→</span><span class="after">Outils et guides de formation en place</span></div>
+      <div class="compare-row"><span class="before">Communication interne informelle</span><span class="arrow">→</span><span class="after">Communication interne mieux structurée</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- IMPACT & RÉSULTATS -->
+<section id="impact">
+  <div class="shell">
+    <div class="eyebrow reveal">En chiffres</div>
+    <h2 class="kicker-title reveal" style="max-width:20ch;margin-bottom:14px;">Impact &amp; résultats.</h2>
+    <p class="lede reveal reveal-delay-1" style="margin-bottom:20px;">Les résultats obtenus grâce aux initiatives mises en place et à la structuration progressive du marketing — au-delà de la seule création de contenu.</p>
+    <p class="reveal reveal-delay-1" style="margin-bottom:56px;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.06em;color:var(--gray);text-transform:uppercase;">Chiffres d'exemple — à remplacer par les données réelles</p>
+
+    <div class="stat-group reveal">
+      <span class="stat-group__title">Réseaux sociaux</span>
+      <div class="stat-grid">
+        <div class="stat-card">
+          <div class="stat-number"><span class="count-up" data-target="140" data-prefix="+" data-suffix="%">0</span></div>
+          <div class="stat-label">Croissance abonnés Instagram</div>
+          <div class="stat-note">Depuis la création du compte jusqu'à aujourd'hui.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number"><span class="count-up" data-target="95" data-prefix="+" data-suffix="%">0</span></div>
+          <div class="stat-label">Croissance abonnés TikTok</div>
+          <div class="stat-note">Depuis le lancement de la plateforme.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number"><span class="count-up" data-target="80" data-prefix="+" data-suffix="%">0</span></div>
+          <div class="stat-label">Augmentation de la portée</div>
+          <div class="stat-note">Nombre de comptes uniques atteints, toutes plateformes confondues.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number"><span class="count-up" data-target="110" data-prefix="+" data-suffix="%">0</span></div>
+          <div class="stat-label">Augmentation des impressions</div>
+          <div class="stat-note">Nombre total d'affichages du contenu publié.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number"><span class="count-up" data-target="320">0</span></div>
+          <div class="stat-label">Publications créées</div>
+          <div class="stat-note">Toutes plateformes confondues, depuis la structuration du contenu.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number"><span class="count-up" data-target="65">0</span></div>
+          <div class="stat-label">Vidéos &amp; Reels produits</div>
+          <div class="stat-note">Contenu vidéo court format, écrit, tourné et monté en interne.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number"><span class="count-up" data-target="48" data-suffix="K">0</span></div>
+          <div class="stat-label">Vues générées</div>
+          <div class="stat-note">Vues cumulées sur l'ensemble du contenu vidéo.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="stat-group reveal">
+      <span class="stat-group__title">Site web</span>
+      <div class="stat-grid">
+        <div class="stat-card">
+          <div class="stat-number"><span class="count-up" data-target="35" data-prefix="+" data-suffix="%">0</span></div>
+          <div class="stat-label">Augmentation des ventes web</div>
+          <div class="stat-note">Comparaison avant / après la refonte et la structuration marketing.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number"><span class="count-up" data-target="60" data-prefix="+" data-suffix="%">0</span></div>
+          <div class="stat-label">Croissance du trafic</div>
+          <div class="stat-note">Trafic global du site, toutes sources confondues.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number"><span class="count-up" data-target="52" data-suffix="K">0</span></div>
+          <div class="stat-label">Visiteurs</div>
+          <div class="stat-note">Visiteurs uniques sur la période mesurée.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number"><span class="count-up" data-target="88" data-suffix="K">0</span></div>
+          <div class="stat-label">Sessions</div>
+          <div class="stat-note">Sessions totales enregistrées dans GA4.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number"><span class="count-up" data-target="1200">0</span></div>
+          <div class="stat-label">Commandes</div>
+          <div class="stat-note">Commandes complétées via le site web.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number"><span class="count-up" data-target="180" data-suffix="K $">0</span></div>
+          <div class="stat-label">Revenus générés</div>
+          <div class="stat-note">Revenus attribuables directement au canal web.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number"><span class="count-up" data-target="18" data-prefix="+" data-suffix="%">0</span></div>
+          <div class="stat-label">Taux de conversion</div>
+          <div class="stat-note">Proportion de sessions ayant mené à un achat.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="stat-group reveal">
+      <span class="stat-group__title">Infolettres</span>
+      <div class="stat-grid">
+        <div class="stat-card">
+          <div class="stat-number"><span class="count-up" data-target="52">0</span></div>
+          <div class="stat-label">Infolettres envoyées</div>
+          <div class="stat-note">Envois hebdomadaires depuis la mise en place du calendrier de contenu.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number"><span class="count-up" data-target="4200">0</span></div>
+          <div class="stat-label">Abonnés</div>
+          <div class="stat-note">Liste d'envoi active, gérée via Cyberimpact.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number"><span class="count-up" data-target="38" data-suffix="%">0</span></div>
+          <div class="stat-label">Taux d'ouverture</div>
+          <div class="stat-note">Moyenne des 12 derniers envois.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number"><span class="count-up" data-target="6.5" data-decimals="1" data-suffix="%">0</span></div>
+          <div class="stat-label">Taux de clic</div>
+          <div class="stat-note">Moyenne des 12 derniers envois.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="stat-group reveal">
+      <span class="stat-group__title">Gestion du changement</span>
+      <div class="stat-grid">
+        <div class="stat-card">
+          <div class="stat-number"><span class="count-up" data-target="24">0</span></div>
+          <div class="stat-label">Procédures créées</div>
+          <div class="stat-note">Documents de référence encadrant les nouveaux processus.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number"><span class="count-up" data-target="12">0</span></div>
+          <div class="stat-label">Guides rédigés</div>
+          <div class="stat-note">Guides utilisateurs pour le nouveau système ERP.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number"><span class="count-up" data-target="40">0</span></div>
+          <div class="stat-label">Documents produits</div>
+          <div class="stat-note">Documentation interne toutes catégories confondues.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number"><span class="count-up" data-target="35">0</span></div>
+          <div class="stat-label">Employés formés</div>
+          <div class="stat-note">Employés accompagnés lors de la transition vers le nouveau système.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number"><span class="count-up" data-target="14">0</span></div>
+          <div class="stat-label">Séances de formation</div>
+          <div class="stat-note">Sessions données individuellement ou en groupe.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="stat-group reveal">
+      <span class="stat-group__title">Réalisations globales</span>
+      <div class="grid-4">
+        <div class="card reveal"><span class="num">SOC</span><h3>3 plateformes lancées</h3><p>Instagram, TikTok et LinkedIn créés et structurés à partir de zéro.</p></div>
+        <div class="card reveal"><span class="num">GA4</span><h3>Google Analytics 4</h3><p>Mise en place complète du suivi analytique du site web.</p></div>
+        <div class="card reveal"><span class="num">GMC</span><h3>Google Merchant Center</h3><p>Configuration pour la diffusion des produits sur les plateformes Google.</p></div>
+        <div class="card reveal"><span class="num">PIX</span><h3>Suivi Meta Pixel</h3><p>Implantation du suivi de performance sur les campagnes Meta.</p></div>
+        <div class="card reveal reveal-delay-1"><span class="num">NEWS</span><h3>Infolettre hebdomadaire</h3><p>Cadence régulière implantée et maintenue depuis son lancement.</p></div>
+        <div class="card reveal reveal-delay-1"><span class="num">WEB</span><h3>Site web refait</h3><p>Refonte complète menée dans le respect des contraintes imposées.</p></div>
+        <div class="card reveal reveal-delay-1"><span class="num">DOC</span><h3>Processus documentés</h3><p>Documentation structurée pour soutenir la croissance de l'équipe.</p></div>
+        <div class="card reveal reveal-delay-2"><span class="num">TRN</span><h3>Employés formés</h3><p>Accompagnement direct lors de la transition vers le nouveau système.</p></div>
+        <div class="card reveal reveal-delay-2"><span class="num">ORG</span><h3>Département structuré</h3><p>Une fonction marketing complète, là où il n'existait rien.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 04 — LE FUTUR -->
+<section id="futur">
+  <div class="shell">
+    <div class="eyebrow reveal">04 — Le futur</div>
+    <h2 class="kicker-title reveal" style="max-width:20ch;margin-bottom:50px;">Les prochaines fondations à poser.</h2>
+    <div class="grid-3">
+      <div class="card reveal"><span class="num">DATA</span><h3>Marketing basé sur les données</h3><p>Approfondir l'utilisation des données pour orienter les décisions marketing.</p></div>
+      <div class="card reveal"><span class="num">KPI</span><h3>Optimiser les indicateurs</h3><p>Raffiner les KPI pour mesurer plus finement l'impact des actions.</p></div>
+      <div class="card reveal reveal-delay-1"><span class="num">AUTO</span><h3>Automatiser les processus</h3><p>Automatiser certaines tâches marketing récurrentes pour gagner en efficacité.</p></div>
+      <div class="card reveal reveal-delay-1"><span class="num">PART</span><h3>Développer les partenariats</h3><p>Créer des collaborations stratégiques pour étendre la portée de la marque.</p></div>
+      <div class="card reveal reveal-delay-2"><span class="num">CULT</span><h3>Faire évoluer la culture marketing</h3><p>Continuer à faire reconnaître la valeur stratégique du marketing dans l'organisation.</p></div>
+      <div class="card reveal reveal-delay-2"><span class="num">CX</span><h3>Améliorer l'expérience client</h3><p>Raffiner continuellement le parcours et l'expérience offerte à la clientèle.</p></div>
+      <div class="card reveal reveal-delay-2"><span class="num">PROMO</span><h3>Développer les promotions produits</h3><p>Élargir les activités promotionnelles au-delà du Black Friday, seule initiative de ce type réalisée à ce jour.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- OUTILS & TECHNOLOGIES -->
+<section id="outils">
+  <div class="shell">
+    <div class="eyebrow reveal">Boîte à outils</div>
+    <h2 class="kicker-title reveal" style="max-width:20ch;margin-bottom:50px;">Outils &amp; technologies.</h2>
+
+    <div class="tool-group reveal">
+      <span class="tool-group__title">Marketing &amp; Analyse</span>
+      <div class="tool-grid">
+        <div class="tool-card"><h4>Google Analytics 4</h4><p><em>Contexte d'utilisation à ajouter.</em></p></div>
+        <div class="tool-card"><h4>Meta Business Suite</h4><p><em>Contexte d'utilisation à ajouter.</em></p></div>
+        <div class="tool-card"><h4>Meta Pixel</h4><p><em>Contexte d'utilisation à ajouter.</em></p></div>
+        <div class="tool-card"><h4>Google Merchant Center</h4><p><em>Contexte d'utilisation à ajouter.</em></p></div>
+        <div class="tool-card"><h4>Cyberimpact</h4><p><em>Contexte d'utilisation à ajouter.</em></p></div>
+      </div>
+    </div>
+
+    <div class="tool-group reveal reveal-delay-1">
+      <span class="tool-group__title">Création</span>
+      <div class="tool-grid">
+        <div class="tool-card"><h4>Canva</h4><p><em>Contexte d'utilisation à ajouter.</em></p></div>
+        <div class="tool-card"><h4>Affinity Designer</h4><p><em>Contexte d'utilisation à ajouter.</em></p></div>
+      </div>
+    </div>
+
+    <div class="tool-group reveal reveal-delay-2">
+      <span class="tool-group__title">Productivité &amp; Collaboration</span>
+      <div class="tool-grid">
+        <div class="tool-card"><h4>Microsoft Excel</h4><p><em>Contexte d'utilisation à ajouter.</em></p></div>
+        <div class="tool-card"><h4>Microsoft Word</h4><p><em>Contexte d'utilisation à ajouter.</em></p></div>
+        <div class="tool-card"><h4>Microsoft PowerPoint</h4><p><em>Contexte d'utilisation à ajouter.</em></p></div>
+        <div class="tool-card"><h4>Outlook</h4><p><em>Contexte d'utilisation à ajouter.</em></p></div>
+        <div class="tool-card"><h4>Slack</h4><p><em>Contexte d'utilisation à ajouter.</em></p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- MES FORCES -->
 <section id="forces">
   <div class="shell">
@@ -560,9 +889,9 @@
     <div class="reveal">
       <div class="eyebrow">Contact</div>
       <h2 class="kicker-title" style="margin-bottom:36px;">Discutons de la prochaine structure à bâtir.</h2>
-      <div class="contact-link"><span class="lab">LinkedIn</span><a class="hover-underline" href="www.linkedin.com/in/ariane-laëtitia-langelier-05bb86204">linkedin.com/in/ariane-laetitia-langelier</a></div>
+      <div class="contact-link"><span class="lab">LinkedIn</span><a class="hover-underline" href="https://www.linkedin.com/in/ariane-la%C3%ABtitia-langelier-05bb86204" target="_blank" rel="noopener">linkedin.com/in/ariane-laëtitia-langelier</a></div>
       <div class="contact-link"><span class="lab">Courriel</span><a class="hover-underline" href="mailto:contact@arianelangelier.com">contact@arianelangelier.com</a></div>
-      <div class="contact-link"><span class="lab">Téléphone</span><a class="hover-underline" href="tel:514-647-3552">514-647-3552</a></div>
+      <div class="contact-link"><span class="lab">Téléphone</span><a class="hover-underline" href="tel:+15146473552">514-647-3552</a></div>
     </div>
     <div class="reveal reveal-delay-1" style="display:flex;justify-content:flex-end;">
       <div class="qr"></div>
@@ -599,6 +928,40 @@
     });
   }, {threshold:0.15, rootMargin:'0px 0px -60px 0px'});
   document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+  // Count-up animation for the Impact & Résultats stat cards
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function easeOutExpo(t){ return t===1 ? 1 : 1-Math.pow(2,-10*t); }
+  function formatValue(el, value){
+    const decimals = el.dataset.decimals ? parseInt(el.dataset.decimals,10) : 0;
+    const prefix = el.dataset.prefix || '';
+    const suffix = el.dataset.suffix || '';
+    return prefix + value.toFixed(decimals) + suffix;
+  }
+  const countEls = document.querySelectorAll('.count-up');
+  const countIO = new IntersectionObserver((entries)=>{
+    entries.forEach(entry=>{
+      if(!entry.isIntersecting) return;
+      const el = entry.target;
+      const target = parseFloat(el.dataset.target || '0');
+      if(prefersReducedMotion){
+        el.textContent = formatValue(el, target);
+        countIO.unobserve(el);
+        return;
+      }
+      const duration = 1600;
+      const start = performance.now();
+      function tick(now){
+        const p = Math.min((now-start)/duration, 1);
+        const eased = easeOutExpo(p);
+        el.textContent = formatValue(el, target*eased);
+        if(p < 1){ requestAnimationFrame(tick); }
+      }
+      requestAnimationFrame(tick);
+      countIO.unobserve(el);
+    });
+  }, {threshold:0.5});
+  countEls.forEach(el=>countIO.observe(el));
 
   // Subtle hero parallax
   const heroPhoto = document.getElementById('heroPhoto');
